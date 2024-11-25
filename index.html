@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido Especial</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 400px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #4caf50;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #yes {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    #no {
+      background-color: #f44336;
+      color: white;
+    }
+
+    #message {
+      font-size: 1.2rem;
+      color: #4caf50;
+      margin-top: 20px;
+      display: none;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bora ser emocionado, gente morna é muito chato!<br>Posteriormente iremos casar e ser felizes para sempre.🤍</h1>
+    <div class="button-container">
+      <button id="yes">Sim! 😍</button>
+      <button id="no">Não 😅</button>
+    </div>
+    <p id="message"></p>
+    <audio id="romanticMusic" src="After.mp3"></audio>
+  </div>
+
+  <script>
+    // Função para fogos de artifício
+    function startConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // Botão "Sim"
+    document.getElementById('yes').addEventListener('click', () => {
+      const message = document.getElementById('message');
+      const music = document.getElementById('romanticMusic');
+
+      message.style.display = 'block';
+      message.innerText = 'Eu também gosto muito de você princesa! 💘 Vou assumir a empresa da família 🤣🤣';
+
+      // Iniciar fogos de artifício
+      startConfetti();
+
+      // Tocar música
+      music.play();
+    });
+
+    // Botão "Não" - Fugindo do cursor
+    const noButton = document.getElementById('no');
+    noButton.addEventListener('mouseover', () => {
+      // Obter a posição do botão "Não"
+      const buttonWidth = noButton.offsetWidth;
+      const buttonHeight = noButton.offsetHeight;
+
+      // Calcular a posição aleatória, sem ultrapassar a tela
+      const randomX = Math.floor(Math.random() * (window.innerWidth - buttonWidth));
+      const randomY = Math.floor(Math.random() * (window.innerHeight - buttonHeight));
+
+      // Movimentar o botão "Não"
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+    });
+  </script>
+</body>
+</html>
